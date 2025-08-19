@@ -1,0 +1,6 @@
+const MONGODB_URI = process.env.MONGODB_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
+const EMAIL_ADDRESS = process.env.EMAIL_ADDRESS
+const EMAIL_PASS = process.env.EMAIL_PASS
+
+export {MONGODB_URI, JWT_SECRET, EMAIL_ADDRESS, EMAIL_PASS};

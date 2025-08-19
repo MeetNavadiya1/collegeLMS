@@ -1,7 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import StudentNavbar from '../components/Navbar';
 import StudentFooter from '../components/Footer';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { AppContext } from '../../Context/AppContext';
+import { toast } from 'react-toastify';
 
 // Sample card data
 const cardData = [
@@ -30,11 +34,22 @@ const gradients = [
 const StudentHome = () => {
   const batchName = 'Batch: MCA 2023';
 
+  const {student} = useContext(AppContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Directly from context
+    if (!student) {
+      navigate("/login")
+    }
+  }, [student]);
+
+
   return (
     <>
     <StudentNavbar/>
       <div className="min-h-screen bg-gray-100 py-10 px-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="mx-auto">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-xl font-bold text-gray-800">Student Panel</h1>
             <span className="text-md font-medium text-gray-700">{batchName}</span>

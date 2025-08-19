@@ -40,12 +40,19 @@ import Projects from './Student/pages/Projects';
 import Announcements from './Student/pages/Announcements';
 import UpdateProfile from './Student/pages/UpdateProfile';
 import StudentLogout from './Student/pages/Logout';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
   return (
-    <Router>
+    <div>
+      <ToastContainer position='top-center' />
+    
       <Routes>
+
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/registration" element={<StudentRegistration />} />
+            <Route path="/forgot_password" element={<ForgotPasswordPage />} />
 
             {/* admin routes */}
             <Route path="/admin" element={<Dashboard />} />
@@ -85,7 +92,8 @@ function App() {
         {/* Fallback - Redirect unknown routes */}
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
-    </Router>
+   
+    </div>
   );
 }
 

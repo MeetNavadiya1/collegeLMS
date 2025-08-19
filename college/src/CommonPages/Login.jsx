@@ -1,30 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import { EnvelopeIcon, KeyIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppContext } from '../Context/AppContext';
 
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({ email: '', password: '' });
+    const [loading, setLoading] = useState(false);
+
+    const { backendURL, setStudent, setProfessor, setAdmin } = useContext(AppContext);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add login logic here
-        alert('Logged in!');
+
+        try {
+            setLoading(true);
+
+            const { data } = await axios.post(`${backendURL}/api/common/login`, {
+                email: formData.email,
+                password: formData.password
+            });
+
+            if (data.success) {
+                toast.success(data.message || "Login successful");
+
+                // Store credentials in localStorage
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("role", data.user.role);
+                if (data.user.batch) localStorage.setItem("batch", data.user.batch);
+                if (data.user.sem) localStorage.setItem("sem", data.user.sem);
+
+                if (data.user.role === "student") {
+                    setStudent(true);
+                    navigate("/student");
+                } else if (data.user.role === "professor") {
+                    setProfessor(true)
+                    navigate("/professor");
+                } else if (data.user.role === "admin") {
+                    setAdmin(true);
+                    navigate("/admin");
+                }
+            } else {
+                toast.error(data.message || "Login failed");
+            }
+
+        } catch (error) {
+            console.error(error);
+            toast.error("Something went wrong. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
             <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-                {/* Logo */}
                 <div className="text-center text-3xl font-bold text-black mb-8">MCAclg</div>
 
-                {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-5">
-                    {/* Email Input */}
                     <div>
                         <label className="block text-sm text-gray-700 mb-1">Email</label>
                         <div className="relative">
@@ -43,7 +85,6 @@ const LoginPage = () => {
                         </div>
                     </div>
 
-                    {/* Password Input */}
                     <div>
                         <label className="block text-sm text-gray-700 mb-1">Password</label>
                         <div className="relative">
@@ -72,28 +113,25 @@ const LoginPage = () => {
                         </div>
                     </div>
 
-                    {/* Forgot Password */}
                     <div className="text-right text-sm">
-                        <a href="#" className="text-blue-600 hover:underline">Forgot Password?</a>
+                        <Link to='/forgot_password' className="text-blue-600 hover:underline">Forgot Password?</Link>
                     </div>
 
-                    {/* Submit Button */}
                     <button
                         type="submit"
+                        disabled={loading}
                         className="w-full bg-blue-800 text-white py-3 rounded hover:bg-blue-700 transition duration-200"
                     >
-                        Log in
+                        {loading ? "Logging in..." : "Log in"}
                     </button>
 
-                    {/* Register Link */}
                     <div className="mt-4 text-center text-sm text-gray-700">
                         Don’t have a student account?{' '}
-                        <a href="#" className="text-blue-600 hover:underline font-medium">
+                        <Link to="/registration" className="text-blue-600 hover:underline font-medium">
                             Create here
-                        </a>
+                        </Link>
                     </div>
                 </form>
-
             </div>
         </div>
     );
