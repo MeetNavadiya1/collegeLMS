@@ -18,8 +18,8 @@ const ReadingMaterials = () => {
   return (
     <>
     <StudentNavbar/>
-      <div className="min-h-screen bg-gray-50 py-10 px-4">
-        <div className="max-w-7xl mx-auto">
+      <div className="min-h-screen bg-gray-50 py-6 px-4">
+        <div className="mx-auto">
           {/* Back button */}
           <Link
             to='/student/subjectdetails'
@@ -27,8 +27,8 @@ const ReadingMaterials = () => {
           >
             ← Back
           </Link>
-
-          <h1 className="mt-6 text-xl font-bold mb-6 text-gray-800 text-center">Reading Materials</h1>
+          
+          <h1 className="mt-8 text-xl font-bold mb-6 text-gray-800">Reading Materials</h1>
 
           {/* Card Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

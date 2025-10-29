@@ -54,9 +54,17 @@ const ProjectSubmissions = () => {
   return (
     <>
     <ProfessorNavbar/>
-    <div className="min-h-screen bg-gray-50 p-4">
+    <div className="min-h-screen bg-gray-50 py-6 px-4">
       {/* Back Button */}
-      <Link to='/professor/projects' className="text-blue-600 hover:underline">&larr; Back</Link>
+      
+      <Link
+          to='/professor/projects'
+          className="text-sm px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md shadow"
+        >
+          ← Back
+        </Link>
+
+      <h2 className="text-xl font-semibold mb-4 text-gray-800 mt-6 text-center">Project Submissions</h2>
 
       {/* Search Input */}
       <div className="mb-4 mt-5">

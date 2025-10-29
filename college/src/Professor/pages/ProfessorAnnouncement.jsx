@@ -48,15 +48,16 @@ const ProfAnnouncementPage = () => {
 
     return (
         <>
-        <ProfessorNavbar/>
+            <ProfessorNavbar />
             <div className="p-6 bg-gray-50 min-h-screen">
+                
                 <Link
-                    to='/professor/'
-                    className="text-sm text-blue-600 hover:underline"
+                    to='/professor'
+                    className="text-sm px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md shadow"
                 >
                     ← Back
                 </Link>
-                <h1 className="mt-5 text-xl font-bold mb-6">Announcements</h1>
+                <h1 className="mt-5 text-xl font-bold mb-6 text-center">Announcements</h1>
 
                 {/* Create Announcement Card */}
                 <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6 mb-8">
@@ -148,7 +149,7 @@ const ProfAnnouncementPage = () => {
                     </div>
                 </div>
             </div>
-            <ProfessorFooter/>
+            <ProfessorFooter />
         </>
     );
 };

@@ -7,6 +7,7 @@ const studentSchema = new mongoose.Schema({
     enrollment: {type: String, required: true},
     batch: {type: String, required: true},
     sem: {type: String, required: true},
+    active: {type: Boolean, default: true}
 })
 
 const studentModel = mongoose.models.student || mongoose.model("student", studentSchema)

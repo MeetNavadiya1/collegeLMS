@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import ProfessorNavbar from '../components/Navbar';
 import ProfessorFooter from '../components/Footer';
 
@@ -41,126 +41,128 @@ const ProfChangePasswordPage = () => {
 
   return (
     <>
-    <ProfessorNavbar/>
-    
-    <div className="min-h-screen bg-gray-50 py-10 px-4 flex justify-center items-start">
-      <div className="w-full max-w-xl">
-        {/* Back Button */}
-        <button
-          onClick={() => navigate(-1)}
-          className="mb-6 text-sm text-blue-600 hover:underline"
+      <ProfessorNavbar />
+      <div className='min-h-screen bg-gray-50 py-6 px-4 '>
+        <Link
+          to='/professor'
+          className="text-sm px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md shadow"
         >
           ← Back
-        </button>
+        </Link>
+        <div className="flex justify-center items-start mt-6">
+          <div className="w-full max-w-xl">
+            {/* Back Button */}
 
-        {/* Card */}
-        <div className="bg-white border rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-6 text-gray-800 text-center">
-            Change Password
-          </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Name */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-              <input
-                type="text"
-                value={professor.name}
-                disabled
-                className="border rounded px-4 py-2 w-full bg-gray-100 text-sm"
-              />
+            {/* Card */}
+            <div className="bg-white border rounded-lg shadow p-6">
+              <h2 className="text-xl font-semibold mb-6 text-gray-800 text-center">
+                Change Password
+              </h2>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Name */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                  <input
+                    type="text"
+                    value={professor.name}
+                    disabled
+                    className="border rounded px-4 py-2 w-full bg-gray-100 text-sm"
+                  />
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input
+                    type="email"
+                    value={professor.email}
+                    disabled
+                    className="border rounded px-4 py-2 w-full bg-gray-100 text-sm"
+                  />
+                </div>
+
+                {/* Batch & Semester */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Batch</label>
+                    <input
+                      type="text"
+                      value={professor.batch}
+                      disabled
+                      className="border rounded px-4 py-2 w-full bg-gray-100 text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Current Semester</label>
+                    <input
+                      type="text"
+                      value={professor.currentSem}
+                      disabled
+                      className="border rounded px-4 py-2 w-full bg-gray-100 text-sm"
+                    />
+                  </div>
+                </div>
+
+                {/* Current Password */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Current Password
+                  </label>
+                  <input
+                    type="password"
+                    name="currentPassword"
+                    value={form.currentPassword}
+                    onChange={handleChange}
+                    className="border rounded px-4 py-2 w-full text-sm"
+                    required
+                  />
+                </div>
+
+                {/* New Password */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    New Password
+                  </label>
+                  <input
+                    type="password"
+                    name="newPassword"
+                    value={form.newPassword}
+                    onChange={handleChange}
+                    className="border rounded px-4 py-2 w-full text-sm"
+                    required
+                  />
+                </div>
+
+                {/* Confirm New Password */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Confirm New Password
+                  </label>
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    value={form.confirmPassword}
+                    onChange={handleChange}
+                    className="border rounded px-4 py-2 w-full text-sm"
+                    required
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 text-sm"
+                >
+                  Change Password
+                </button>
+              </form>
             </div>
-
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <input
-                type="email"
-                value={professor.email}
-                disabled
-                className="border rounded px-4 py-2 w-full bg-gray-100 text-sm"
-              />
-            </div>
-
-            {/* Batch & Semester */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Batch</label>
-                <input
-                  type="text"
-                  value={professor.batch}
-                  disabled
-                  className="border rounded px-4 py-2 w-full bg-gray-100 text-sm"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Current Semester</label>
-                <input
-                  type="text"
-                  value={professor.currentSem}
-                  disabled
-                  className="border rounded px-4 py-2 w-full bg-gray-100 text-sm"
-                />
-              </div>
-            </div>
-
-            {/* Current Password */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Current Password
-              </label>
-              <input
-                type="password"
-                name="currentPassword"
-                value={form.currentPassword}
-                onChange={handleChange}
-                className="border rounded px-4 py-2 w-full text-sm"
-                required
-              />
-            </div>
-
-            {/* New Password */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                New Password
-              </label>
-              <input
-                type="password"
-                name="newPassword"
-                value={form.newPassword}
-                onChange={handleChange}
-                className="border rounded px-4 py-2 w-full text-sm"
-                required
-              />
-            </div>
-
-            {/* Confirm New Password */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Confirm New Password
-              </label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={form.confirmPassword}
-                onChange={handleChange}
-                className="border rounded px-4 py-2 w-full text-sm"
-                required
-              />
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 text-sm"
-            >
-              Change Password
-            </button>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
-    <ProfessorFooter/>
+      <ProfessorFooter />
     </>
   );
 };

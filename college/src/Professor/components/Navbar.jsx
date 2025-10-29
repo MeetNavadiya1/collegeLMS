@@ -37,7 +37,7 @@ const ProfessorNavbar = () => {
                         <ul className="text-sm text-white">
                             <li className="px-4 py-2 flex items-center gap-2 hover:bg-gray-800 cursor-pointer rounded-t-md">
                                 <PencilSquareIcon className="h-5 w-5" />
-                                <NavLink to="/professor/changepassword">Update Profile</NavLink>
+                                <NavLink to="/professor/changepassword">Change Password</NavLink>
                             </li>
                             <li className="px-4 py-2 flex items-center gap-2 hover:bg-gray-800 cursor-pointer rounded-b-md">
                                 <ArrowRightOnRectangleIcon className="h-5 w-5" />

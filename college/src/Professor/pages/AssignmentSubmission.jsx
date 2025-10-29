@@ -53,113 +53,117 @@ const AssignmentSubmissions = () => {
 
   return (
     <>
-    <ProfessorNavbar/>
-    <div className="min-h-screen bg-gray-50 p-4">
-      {/* Back Button */}
-      <Link to='/professor/assignments' className="text-blue-600 hover:underline">&larr; Back</Link>
+      <ProfessorNavbar />
+      <div className="min-h-screen bg-gray-50 py-6 px-4">
+        {/* Back Button */}
+        <Link
+          to='/professor/assignments'
+          className="text-sm px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md shadow"
+        >
+          ← Back
+        </Link>
 
-      {/* Search Input */}
-      <div className="mb-4 mt-5">
-        <input
-          type="text"
-          placeholder="Search by name or enrollment number"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="border border-gray-300 rounded px-4 py-2 w-full max-w-md"
-        />
-      </div>
+        <h2 className="text-xl font-semibold mb-4 mt-6 text-gray-800 text-center">Assignment Submissions</h2>
 
-      {/* Table */}
-      <div className="overflow-x-auto bg-white border rounded-lg p-4">
-        <table className="min-w-[1100px] w-full text-sm text-left text-gray-700">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-2 py-2 w-32">Name</th>
-              <th className="px-2 py-2 w-25">Enrollment</th>
-              <th className="px-2 py-2 w-25">Submitted At</th>
-              <th className="px-2 py-2 w-40">Submited Assignment</th>
-              <th className="px-2 py-2 w-[350px]">Feedback</th>
-              <th className="px-2 py-2 w-36 text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredSubmissions.map((sub) => {
-              const isEditing = editMode[sub.id];
-              return (
-                <tr key={sub.id} className="border-t align-top">
-                  <td className="px-2 py-2">{sub.name}</td>
-                  <td className="px-2 py-2">{sub.enrollment}</td>
-                  <td className="px-2 py-2">{sub.submittedAt}</td>
-                  <td className="px-2 py-2">
-                    <button
-                      className={`text-xs px-3 py-2 rounded ${
-                        isEditing
-                          ? 'bg-blue-500 text-white'
-                          : 'bg-gray-300 text-gray-600 cursor-not-allowed'
-                      }`}
-                      disabled={!isEditing}
-                      onClick={() => {
-                        if (isEditing) window.open(sub.fileUrl, '_blank');
-                      }}
-                    >
-                      Download File
-                    </button>
-                  </td>
-                  <td className="px-2 py-2">
-                    <div className="relative">
-                      <textarea
-                        className={`w-full min-h-[120px] border rounded p-2 pr-24 resize-none ${
-                          isEditing
-                            ? 'bg-white text-gray-800'
-                            : 'bg-gray-100 text-gray-500 cursor-not-allowed'
-                        }`}
-                        value={feedbacks[sub.id]}
-                        onChange={(e) =>
-                          setFeedbacks((prev) => ({
-                            ...prev,
-                            [sub.id]: e.target.value,
-                          }))
-                        }
+        {/* Search Input */}
+        <div className="mb-4 mt-5">
+          <input
+            type="text"
+            placeholder="Search by name or enrollment number"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border border-gray-300 rounded px-4 py-2 w-full max-w-md"
+          />
+        </div>
+
+        {/* Table */}
+        <div className="overflow-x-auto bg-white border rounded-lg p-4">
+          <table className="min-w-[1100px] w-full text-sm text-left text-gray-700">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="px-2 py-2 w-32">Name</th>
+                <th className="px-2 py-2 w-25">Enrollment</th>
+                <th className="px-2 py-2 w-25">Submitted At</th>
+                <th className="px-2 py-2 w-40">Submited Assignment</th>
+                <th className="px-2 py-2 w-[350px]">Feedback</th>
+                <th className="px-2 py-2 w-36 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredSubmissions.map((sub) => {
+                const isEditing = editMode[sub.id];
+                return (
+                  <tr key={sub.id} className="border-t align-top">
+                    <td className="px-2 py-2">{sub.name}</td>
+                    <td className="px-2 py-2">{sub.enrollment}</td>
+                    <td className="px-2 py-2">{sub.submittedAt}</td>
+                    <td className="px-2 py-2">
+                      <button
+                        className={`text-xs px-3 py-2 rounded ${isEditing
+                            ? 'bg-blue-500 text-white'
+                            : 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                          }`}
                         disabled={!isEditing}
-                      />
-                      <button
-                        className={`absolute bottom-2 right-2 text-xs px-3 py-1 rounded text-white ${
-                          isEditing
-                            ? 'bg-gradient-to-r from-purple-400 via-pink-500 to-red-500'
-                            : 'bg-gray-300 cursor-not-allowed'
-                        }`}
-                        disabled={!isEditing}
-                        onClick={() => handleAIButton(sub.id)}
+                        onClick={() => {
+                          if (isEditing) window.open(sub.fileUrl, '_blank');
+                        }}
                       >
-                        Generate AI Feedback
+                        Download File
                       </button>
-                    </div>
-                  </td>
-                  <td className="px-2 py-2 text-center space-y-2">
-                    {!isEditing ? (
-                      <button
-                        onClick={() => handleUpdateClick(sub.id)}
-                        className="bg-yellow-400 text-white px-3 py-1 rounded"
-                      >
-                        Update
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleSubmitClick(sub.id)}
-                        className="bg-green-600 text-white px-3 py-1 rounded"
-                      >
-                        Submit
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                    </td>
+                    <td className="px-2 py-2">
+                      <div className="relative">
+                        <textarea
+                          className={`w-full min-h-[120px] border rounded p-2 pr-24 resize-none ${isEditing
+                              ? 'bg-white text-gray-800'
+                              : 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                            }`}
+                          value={feedbacks[sub.id]}
+                          onChange={(e) =>
+                            setFeedbacks((prev) => ({
+                              ...prev,
+                              [sub.id]: e.target.value,
+                            }))
+                          }
+                          disabled={!isEditing}
+                        />
+                        <button
+                          className={`absolute bottom-2 right-2 text-xs px-3 py-1 rounded text-white ${isEditing
+                              ? 'bg-gradient-to-r from-purple-400 via-pink-500 to-red-500'
+                              : 'bg-gray-300 cursor-not-allowed'
+                            }`}
+                          disabled={!isEditing}
+                          onClick={() => handleAIButton(sub.id)}
+                        >
+                          Generate AI Feedback
+                        </button>
+                      </div>
+                    </td>
+                    <td className="px-2 py-2 text-center space-y-2">
+                      {!isEditing ? (
+                        <button
+                          onClick={() => handleUpdateClick(sub.id)}
+                          className="bg-yellow-400 text-white px-3 py-1 rounded"
+                        >
+                          Update
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleSubmitClick(sub.id)}
+                          className="bg-green-600 text-white px-3 py-1 rounded"
+                        >
+                          Submit
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <ProfessorFooter/>
+      <ProfessorFooter />
     </>
   );
 };

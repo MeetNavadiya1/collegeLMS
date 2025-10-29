@@ -40,7 +40,7 @@ const StudentHome = () => {
   useEffect(() => {
     // Directly from context
     if (!student) {
-      navigate("/login")
+      // navigate("/login")
     }
   }, [student]);
 
@@ -48,7 +48,7 @@ const StudentHome = () => {
   return (
     <>
     <StudentNavbar/>
-      <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <div className="min-h-screen bg-gray-100 py-6 px-4">
         <div className="mx-auto">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-xl font-bold text-gray-800">Student Panel</h1>

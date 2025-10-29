@@ -33,8 +33,8 @@ const ViewProjectDetails = () => {
   return (
     <>
     <StudentNavbar/>
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gray-50 py-6 px-4">
+      <div className="mx-auto">
         {/* Back Button */}
         <Link
           to='/student/subjectdetails/projects'

@@ -89,128 +89,129 @@ const ProjectPage = () => {
 
     return (
         <>
-        <ProfessorNavbar/>
-        <div className="min-h-screen bg-gray-50 py-10 px-4">
-            {/* Back Button */}
-            <Link
-            to='/professor/'
-                className="text-sm text-blue-600 hover:underline"
-            >
-                ← Back
-            </Link>
+            <ProfessorNavbar />
+            <div className="min-h-screen bg-gray-50 py-6 px-4">
+                {/* Back Button */}
+                
+                <Link
+                    to='/professor'
+                    className="text-sm px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md shadow"
+                >
+                    ← Back
+                </Link>
 
-            {/* Create Project Card */}
-            <div className="mt-5 max-w-4xl mx-auto bg-white border rounded-lg shadow p-6 mb-10">
-                <h2 className="text-xl font-semibold mb-4 text-gray-800">Create New Project</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Title & Due Date */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Project Title
-                            </label>
-                            <input
-                                type="text"
-                                name="title"
-                                value={form.title}
-                                onChange={handleChange}
-                                className="border rounded px-4 py-2 w-full text-sm"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Due Date
-                            </label>
-                            <input
-                                type="date"
-                                name="dueDate"
-                                value={form.dueDate}
-                                onChange={handleChange}
-                                className="border rounded px-4 py-2 w-full text-sm"
-                                required
-                            />
-                        </div>
-                    </div>
-
-                    {/* Description */}
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Description
-                        </label>
-                        <textarea
-                            name="description"
-                            rows="4"
-                            value={form.description}
-                            onChange={handleChange}
-                            className="border rounded px-4 py-2 w-full text-sm"
-                            placeholder="Enter project description"
-                            required
-                        />
-                    </div>
-
-                    {/* File Upload */}
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Upload File
-                        </label>
-                        <input
-                            type="file"
-                            onChange={handleFileChange}
-                            className="border rounded px-4 py-2 w-full text-sm"
-                        />
-                    </div>
-
-                    {/* Submit Button */}
-                    <button
-                        type="submit"
-                        className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded shadow hover:opacity-90 text-sm"
-                    >
-                        Create Project
-                    </button>
-                </form>
-            </div>
-
-            {/* Projects Display */}
-            <div>
-                <h2 className="text-xl font-semibold mb-4 text-gray-800">Projects</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {projects.map((proj, idx) => (
-                        <div
-                            key={idx}
-                            className="bg-white border rounded-lg shadow-sm p-4 flex flex-col"
-                        >
-                            <h3 className="text-sm font-semibold text-gray-800 mb-1">{proj.title}</h3>
-                            <p className="text-xs text-gray-500">Created: {proj.createdAt}</p>
-                            <p className="text-xs text-gray-500 mb-2">Due: {proj.dueDate}</p>
-                            <p className="text-xs text-gray-700 mb-2">{proj.description}</p>
-
-                            <div className="flex flex-wrap gap-2 mt-auto">
-                                <button
-                                    onClick={() => handleUpdate(idx)}
-                                    className="text-xs text-yellow-600 hover:underline"
-                                >
-                                    ✏️ Update
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(idx)}
-                                    className="text-xs text-red-600 hover:underline"
-                                >
-                                    🗑️ Delete
-                                </button>
-                                <Link
-                                    to='/professor/projects/submissions/:id'
-                                    className="text-xs text-blue-600 hover:underline ml-auto"
-                                >
-                                    View Submissions
-                                </Link>
+                {/* Create Project Card */}
+                <div className="mt-5 max-w-4xl mx-auto bg-white border rounded-lg shadow p-6 mb-10">
+                    <h2 className="text-xl font-semibold mb-4 text-gray-800">Create New Project</h2>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        {/* Title & Due Date */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Project Title
+                                </label>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value={form.title}
+                                    onChange={handleChange}
+                                    className="border rounded px-4 py-2 w-full text-sm"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Due Date
+                                </label>
+                                <input
+                                    type="date"
+                                    name="dueDate"
+                                    value={form.dueDate}
+                                    onChange={handleChange}
+                                    className="border rounded px-4 py-2 w-full text-sm"
+                                    required
+                                />
                             </div>
                         </div>
-                    ))}
+
+                        {/* Description */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Description
+                            </label>
+                            <textarea
+                                name="description"
+                                rows="4"
+                                value={form.description}
+                                onChange={handleChange}
+                                className="border rounded px-4 py-2 w-full text-sm"
+                                placeholder="Enter project description"
+                                required
+                            />
+                        </div>
+
+                        {/* File Upload */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Upload File
+                            </label>
+                            <input
+                                type="file"
+                                onChange={handleFileChange}
+                                className="border rounded px-4 py-2 w-full text-sm"
+                            />
+                        </div>
+
+                        {/* Submit Button */}
+                        <button
+                            type="submit"
+                            className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded shadow hover:opacity-90 text-sm"
+                        >
+                            Create Project
+                        </button>
+                    </form>
+                </div>
+
+                {/* Projects Display */}
+                <div>
+                    <h2 className="text-xl font-semibold mb-4 text-gray-800">Projects</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {projects.map((proj, idx) => (
+                            <div
+                                key={idx}
+                                className="bg-white border rounded-lg shadow-sm p-4 flex flex-col"
+                            >
+                                <h3 className="text-sm font-semibold text-gray-800 mb-1">{proj.title}</h3>
+                                <p className="text-xs text-gray-500">Created: {proj.createdAt}</p>
+                                <p className="text-xs text-gray-500 mb-2">Due: {proj.dueDate}</p>
+                                <p className="text-xs text-gray-700 mb-2">{proj.description}</p>
+
+                                <div className="flex flex-wrap gap-2 mt-auto">
+                                    <button
+                                        onClick={() => handleUpdate(idx)}
+                                        className="text-xs text-yellow-600 hover:underline"
+                                    >
+                                        ✏️ Update
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(idx)}
+                                        className="text-xs text-red-600 hover:underline"
+                                    >
+                                        🗑️ Delete
+                                    </button>
+                                    <Link
+                                        to='/professor/projects/submissions/:id'
+                                        className="text-xs text-blue-600 hover:underline ml-auto"
+                                    >
+                                        View Submissions
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
-        <ProfessorFooter/>
+            <ProfessorFooter />
         </>
     );
 };
